@@ -557,3 +557,163 @@ Digital signatures are the electronic equivalent of handwritten signatures, but 
     - Poor development processes
     - Insufficient testing
     - Lack of security awareness
+
+## Entity Authentication and Identification
+
+Entity authentication is the process of verifying that an entity (person, device, or system) is who or what it claims to be. Unlike identification, which only establishes who the entity is, authentication verifies the claimed identity.
+
+### Key Concepts
+
+- **Authentication Factors**:
+    - Something you know (passwords, PINs)
+    - Something you have (smart cards, tokens)
+    - Something you are (biometrics)
+    - Somewhere you are (location-based)
+
+### Authentication Protocols
+
+Authentication protocols typically involve:
+1. **Challenge-Response**: One party challenges the other to prove possession of a secret
+2. **Time Stamps**: To prevent replay attacks
+3. **Nonces**: Random numbers used once to ensure freshness
+
+### Security Analysis
+
+When analyzing an authentication protocol, consider:
+- What secrets are being verified?
+- Are timestamps or nonces used to prevent replay attacks?
+- Is mutual authentication provided?
+- What happens if a message is intercepted or modified?
+- What information might be leaked to an attacker?
+
+
+## Case Studies
+
+### Case Study 1: GSM Security
+
+GSM (Global System for Mobile Communications) implements several security features to protect communications:
+
+#### Authentication in GSM
+
+Authentication in GSM relies on a challenge-response mechanism:
+1. The network sends a random challenge (RAND) to the subscriber
+2. The subscriber's SIM card computes a response (SRES) using the secret key Ki and algorithm A3
+3. The network performs the same calculation and compares results
+
+![img_46.png](img_46.png)
+
+#### Confidentiality in GSM
+
+1. The subscriber and network generate a session key (Kc) using algorithm A8
+2. This key is used with algorithm A5 to encrypt communication
+3. Each frame is encrypted independently
+
+#### GSM Security Weaknesses
+
+- A3/A8 algorithms (COMP128) have been broken
+- A5/1 and A5/2 encryption algorithms have vulnerabilities
+- No mutual authentication (network doesn't authenticate to subscriber)
+- No data integrity protection
+- No protection against IMSI catchers
+
+### Case Study 2: Payment Card Security
+
+Payment card systems implement multiple security layers:
+
+#### Card Physical Security Features
+
+- Holograms, microprinting, UV-sensitive printing
+- EMV chips (much more secure than magnetic stripes)
+- Card Verification Value (CVV/CVC)
+
+#### Transaction Security
+
+EMV (Europay, Mastercard, and Visa) chip transaction flow:
+1. Card authentication: Terminal verifies the card is genuine
+2. Cardholder verification: PIN or signature confirms cardholder identity
+3. Transaction authorization: Online or offline approval
+4. Cryptogram validation: Card and terminal exchange cryptograms to validate the transaction
+
+![img_45.png](img_45.png)
+
+#### Payment Card Vulnerabilities
+
+- Skimming attacks against magnetic stripes
+- Man-in-the-middle attacks
+- Relay attacks against contactless cards
+- Social engineering to obtain card details
+
+
+---
+
+# What AI Said I Missed - Condensed with Explanations
+
+## Security Concepts & Services
+
+
+**Authentication**: Verifies that entities are who they claim to be, typically using passwords, biometrics, or security tokens.
+
+**Non-repudiation**: Prevents denial of participation in a communication, using techniques like digital signatures to provide proof of origin.
+
+
+## Cryptography Fundamentals
+
+
+**Perfect Secrecy**: Achieved when ciphertext provides absolutely no information about the plaintext, with the one-time pad being the only proven system that provides this.
+
+## Stream Ciphers
+
+
+**Keystream Reuse Attack**: Occurs when the same keystream encrypts different messages, allowing attackers to XOR ciphertexts and recover information about plaintexts.
+
+**Bit Flipping Attack**: Allows attackers to make predictable changes to plaintext by altering specific bits in the ciphertext, exploiting the XOR operation's properties.
+
+## Authentication & Access Control
+
+**Entity Authentication**: Verifies claimed identity at the time of interaction, using challenge-response protocols, biometrics, or multi-factor methods.
+
+**Identification vs. Authentication**: Identification establishes who someone is, while authentication verifies that claimed identity is legitimate.
+
+**Authentication Factors**: Include something you know (passwords), something you have (tokens), something you are (biometrics), and somewhere you are (location).
+
+**Discretionary Access Control (DAC)**: Allows resource owners to determine who can access their resources, commonly used in file systems where users set permissions.
+
+**Mandatory Access Control (MAC)**: Enforces access based on security labels and clearance levels, with the system (not owners) controlling access decisions.
+
+**Role-Based Access Control (RBAC)**: Grants access based on roles within an organization, simplifying permission management by assigning users to defined roles.
+
+## Key Management & Security
+
+**Key Transport**: Process where one party generates a key and securely transfers it to others, often using encryption with pre-existing keys.
+
+**Key Agreement**: Protocol where all parties contribute to generating a shared key, with Diffie-Hellman being the classic example.
+
+**Forward Secrecy**: Security property ensuring that compromise of long-term keys doesn't compromise past session keys, protecting previously encrypted communications.
+
+## Network Security Components
+
+**IPsec**: Security protocol suite operating at the network layer (Layer 3) that provides authentication, integrity, and confidentiality for IP packets.
+
+**TLS**: Security protocol operating at the transport layer (Layer 4) that secures web browsing, email, and other applications through encryption and authentication.
+
+## Security Design Principles
+
+**Defense in Depth**: Strategy using multiple security layers throughout a system, ensuring that if one defense fails, others still provide protection.
+
+**Least Privilege**: Principle restricting access rights to the minimum necessary for users to perform their work, reducing potential damage from accidents or attacks.
+
+**Separation of Duties**: Requires multiple people to complete critical tasks, preventing any single person from having excessive power or ability to commit fraud.
+
+**Complete Mediation**: Ensures every access to a resource must be checked for proper authorization, with no exceptions or backdoors.
+
+**Fail-Safe Defaults**: Sets the default condition to deny access unless explicitly granted, ensuring systems remain secure when configurations are incomplete.
+
+**Open Design**: Principle stating system security shouldn't depend on design secrecy but rather on proper key management and implementation.
+
+## Malware Types
+
+**Ransomware**: Malware that encrypts victim's files and demands payment for the decryption key, effectively holding data hostage.
+
+
+
+**Rootkit**: Malware providing persistent privileged access while hiding its presence by modifying operating system functionality, making it extremely difficult to detect.
