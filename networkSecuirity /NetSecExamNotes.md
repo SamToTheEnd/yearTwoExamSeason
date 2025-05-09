@@ -13,9 +13,8 @@
 
 - **FALSE:** Commercial computers in the 1970s came with no security controls.
     - **Justification:** Systems in the 1970s like IBM's System/370 with RACF and MULTICS implemented basic security controls including user authentication, access controls, and privilege separation.
+    - **Justification:** You can also argue this is True due to how weak and uncommon the security features were in the 70s on **most** machines.
 
-- **FALSE:** PCs in the 1980s came with strong security controls.
-    - **Justification:** Early personal computers (IBM PC, Apple II, DOS systems) lacked security features like user authentication, process isolation, memory protection, and access controls. Multiple users could access all files and resources.
 
 - **TRUE:** The first computers were programmed in decimal.
     - **Justification:** Early computers like ENIAC (1945) used decimal number systems and were programmed through physical switches and cables before binary programming became standard.
@@ -126,26 +125,41 @@
 ### DNS Resolution Process
 
 #### How DNS Resolution Works:
-1. **Client checks local cache** first for recently resolved domains
-2. If not found, client sends query to its **recursive DNS resolver**
-3. Resolver checks its own cache; if not found, begins resolution process
-4. Resolver queries a **root server** which directs to the appropriate TLD server
-5. Resolver queries the **TLD server** (e.g., .com) which provides the authoritative nameserver
-6. Resolver queries the **authoritative nameserver** which returns the IP address
-7. Resolver **caches the result** according to TTL value and returns it to the client
+1. **DNS Query Initiation**: The client enters a domain name (e.g., example.com) in their browser, which needs to be resolved to an IP address.
+
+2. **Local DNS Cache Check**: The client first checks its local DNS cache to see if this domain has been resolved recently.
+
+3. **Query to Recursive Resolver**: If not in the cache, the client sends a query to its configured DNS resolver (typically provided by the ISP or a third-party like Google's 8.8.8.8).
+
+4. **Root Server Query**: If the recursive resolver doesn't have the answer cached, it queries a root DNS server, which responds with the address of the appropriate Top-Level Domain (TLD) server (e.g., .com TLD server).
+
+5. **TLD Server Query**: The recursive resolver queries the TLD server, which responds with the address of the authoritative name server for the specific domain.
+
+6. **Authoritative Name Server Query**: The recursive resolver queries the authoritative name server, which responds with the IP address for the requested domain.
+
+7. **Response to Client**: The recursive resolver returns the IP address to the client.
+
+8. **Caching**: Both the client and the recursive resolver cache this information for a period specified by the Time-To-Live (TTL) value to speed up future requests.
 
 ```
-Client                Recursive                Root               TLD                Auth
-  |                     Resolver               Server             Server             Server
-  |                        |                     |                  |                  |
-  |---Query example.com-->|                     |                  |                  |
-  |                        |--Query example.com->|                  |                  |
-  |                        |<--TLD server for .com--|              |                  |
-  |                        |---Query example.com--->|              |                  |
-  |                        |<--Auth server for example.com--|      |                  |
-  |                        |------Query example.com---------->|    |                  |
-  |                        |<---------IP for example.com------|    |                  |
-  |<--IP for example.com--|                     |                  |                  |
+Client                Recursive Resolver           Root Server
+  |                          |                         |
+  |---DNS query------------->|                         |
+  |                          |---Query for TLD-------->|
+  |                          |<--TLD server address----|
+  |                          |                         |
+  |                          |         TLD Server      |
+  |                          |            |            |
+  |                          |---Query for Auth NS---->|
+  |                          |<--Auth NS address-------|
+  |                          |                         |
+  |                          |     Authoritative NS    |
+  |                          |            |            |
+  |                          |---Query for IP--------->|
+  |                          |<--IP address------------|
+  |                          |                         |
+  |<--IP address response----|                         |
+  |                          |                         |
 ```
 
 #### DNS Security Weaknesses:
