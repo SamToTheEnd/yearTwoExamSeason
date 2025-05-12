@@ -1,4 +1,4 @@
-# Computer and Network Security Study Guide
+# Computer and Network Exam Notes
 
 ## PART 1: TRUE/FALSE QUESTIONS WITH JUSTIFICATIONS
 
@@ -6,7 +6,7 @@
 
 #### 1. History and Evolution of Security
 - **FALSE:** The Ware report's diagram is no longer applicable to modern IT security.
-    - **Justification:** The Ware report (1970s) established foundational concepts like the CIA triad (Confidentiality, Integrity, Availability) that remain fundamental to security frameworks today. Modern security models like Zero Trust still protect these same core attributes.
+    - **Justification:** The Ware report (1970s) established foundational concepts like the CIA triad (Confidentiality, Integrity, Availability) that remain fundamental to security frameworks today. 
 
 - **TRUE:** MULTICS inspired fundamental concepts of modern operating system access control.
     - **Justification:** MULTICS introduced critical security concepts including protection rings, access control lists, and privilege separation that heavily influenced UNIX and modern operating systems.
@@ -28,7 +28,7 @@
 - **TRUE**: Saltzer & Schroeder’s principles (1975) remain foundational for secure system design.
     - **Justification:** Principles like "least privilege" and "fail-safe defaults" are still critical in modern security architectures.
 
-#### 2. System Architecture and Memory
+#### 2. System Security
 - **TRUE/FALSE:** Data and programs are separated in memory.
     - **Justification (TRUE):** Modern architectures implement memory segmentation that separates code (text segment) from data segments through W^X (Write XOR Execute) protection, preventing regions from being both writable and executable.
     - **Justification (FALSE):** Some architectures and systems don't strictly enforce this separation, allowing execution of data sections in certain configurations.
@@ -36,27 +36,6 @@
 - **FALSE:** Data stored in a process' memory is always accompanied by type information.
     - **Justification:** Many programming languages (C/C++) allow raw memory manipulation without enforcing type metadata. Memory can contain arbitrary binary data without explicit type information.
 
-#### 3. Network Security
-- **FALSE:** The TCP handshake prevents man-in-the-middle attacks.
-    - **Justification:** The TCP three-way handshake establishes connections but has no authentication mechanisms. An attacker can intercept packets and establish separate connections with both parties, relaying information between them.
-
-- **FALSE:** ARP prevents man-in-the-middle attacks.
-    - **Justification:** ARP has no authentication mechanisms and is vulnerable to ARP spoofing/poisoning. These vulnerabilities make ARP a common vector for performing man-in-the-middle attacks.
-
-- **FALSE:** DNS by itself provides strong integrity guarantees.
-    - **Justification:** Traditional DNS sends queries and responses unencrypted and unauthenticated, making it vulnerable to cache poisoning and spoofing attacks. DNSSEC was developed specifically to address these integrity issues.
-
-#### 4. Web Security
-- **FALSE:** If a script from london.ac.uk makes a request to royalholloway.ac.uk, cookies for london.ac.uk will be included.
-    - **Justification:** Browsers only send cookies to the domain they belong to (same-origin policy), unless specifically configured with special attributes for cross-origin sharing.
-
-- **FALSE:** Reflected cross-site scripting attacks are based on a vulnerability of the database system.
-    - **Justification:** Reflected XSS attacks exploit web application input validation failures, not database vulnerabilities. They occur when untrusted user input is immediately returned without proper sanitization.
-
-- **TRUE:** Javascript can be embedded in HTML in several tags.
-    - **Justification:** JavaScript can be embedded in multiple HTML tags including: `<script>` (primary method), event handler attributes like `onclick`, `onload`, `href` with javascript: protocol, and inline event handlers.
-
-#### 5. System Security
 - **FALSE:** Process gates are a technique to prevent reference monitors.
     - **Justification:** Process gates are actually a mechanism to implement reference monitors by controlling how processes can call privileged operations, ensuring security checks when transitioning between privilege levels.
 
@@ -79,8 +58,30 @@
     - **Justification:** SUID allows temporary elevation of privileges, aligning with the principle of minimizing access rights.
 
 
+#### 3. Network Security
+- **FALSE:** The TCP handshake prevents man-in-the-middle attacks.
+    - **Justification:** The TCP three-way handshake establishes connections but has no authentication mechanisms. An attacker can intercept packets and establish separate connections with both parties, relaying information between them.
+
+- **FALSE:** ARP prevents man-in-the-middle attacks.
+    - **Justification:** ARP has no authentication mechanisms and is vulnerable to ARP spoofing/poisoning. These vulnerabilities make ARP a common vector for performing man-in-the-middle attacks.
+
+- **FALSE:** DNS by itself provides strong integrity guarantees.
+    - **Justification:** Traditional DNS sends queries and responses unencrypted and unauthenticated, making it vulnerable to cache poisoning and spoofing attacks. DNSSEC was developed specifically to address these integrity issues.
+
+#### 4. Web Security
+- **FALSE:** If a script from london.ac.uk makes a request to royalholloway.ac.uk, cookies for london.ac.uk will be included.
+    - **Justification:** Browsers only send cookies to the domain they belong to (same-origin policy), unless specifically configured with special attributes for cross-origin sharing.
+
+- **FALSE:** Reflected cross-site scripting attacks are based on a vulnerability of the database system.
+    - **Justification:** Reflected XSS attacks exploit web application input validation failures, not database vulnerabilities. They occur when untrusted user input is immediately returned without proper sanitization.
+
+- **TRUE:** Javascript can be embedded in HTML in several tags.
+    - **Justification:** JavaScript can be embedded in multiple HTML tags including: `<script>` (primary method), event handler attributes like `onclick`, `onload`, `href` with javascript: protocol, and inline event handlers.
 
 
+
+
+    
     
 
     Evolution of Security by Decade:
@@ -229,25 +230,25 @@ Client                Recursive Resolver           Root Server
 
 ### Key Acronyms to Know
 
-| Acronym | Full Form | Description |
-|---------|-----------|-------------|
-| UID     | User ID | Numeric user identifier in Unix-like systems |
-| GID     | Group ID | Numeric group identifier |
-| EUID    | Effective User ID | User ID used for permission checks |
-| RGID    | Real Group ID | Original group ID of user |
-| SUID    | Set User ID | Permission bit allowing execution with file owner's privileges |
-| SGID    | Set Group ID | Permission bit allowing execution with file group's privileges |
-| ACL     | Access Control List | Rules specifying which users/processes have access to objects |
-| DAC     | Discretionary Access Control | Control based on identity of requestor and access rules |
-| MAC     | Mandatory Access Control | System-enforced access control independent of user wishes |
-| RBAC    | Role-Based Access Control | Access rights assigned to roles |
-| NOP     | No Operation | Assembly instruction that does nothing |
-| GDB     | GNU Debugger | Debugging tool for programs |
-| TOP     | Trusted Operating Platform | Framework for secure computing environment |
-| TOCTOU  | Time Of Check to Time Of Use | Race condition vulnerability |
-| DEP     | Data Execution Prevention | Security feature preventing code execution from data pages |
+| Acronym | Full Form                          | Description |
+|---------|------------------------------------|-------------|
+| UID     | User ID                            | Numeric user identifier in Unix-like systems |
+| GID     | Group ID                           | Numeric group identifier |
+| EUID    | Effective User ID                  | User ID used for permission checks |
+| RGID    | Real Group ID                      | Original group ID of user |
+| SUID    | Set User ID                        | Permission bit allowing execution with file owner's privileges |
+| SGID    | Set Group ID                       | Permission bit allowing execution with file group's privileges |
+| ACL     | Access Control List                | Rules specifying which users/processes have access to objects |
+| DAC     | Discretionary Access Control       | Control based on identity of requestor and access rules |
+| MAC     | Mandatory Access Control           | System-enforced access control independent of user wishes |
+| RBAC    | Role-Based Access Control          | Access rights assigned to roles |
+| NOP     | No Operation                       | Assembly instruction that does nothing |
+| GDB     | GNU Debugger                       | Debugging tool for programs |
+| TOP     | Table of properties                | Framework for secure computing environment |
+| TOCTOU  | Time Of Check to Time Of Use       | Race condition vulnerability |
+| DEP     | Data Execution Prevention          | Security feature preventing code execution from data pages |
 | ASLR    | Address Space Layout Randomization | Randomizes memory addresses to prevent exploitation |
-| SELinux | Security-Enhanced Linux | Implementation of MAC for Linux |
+| SELinux | Security-Enhanced Linux            | Implementation of MAC for Linux |
 
 ### Linux File System Security
 
